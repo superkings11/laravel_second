@@ -74,6 +74,7 @@ class TaskController extends Controller
     public function edit(Task $task)
     {
         //
+        return view('tasks.edit',compact('task',$task));
     }
 
     /**
@@ -86,6 +87,17 @@ class TaskController extends Controller
     public function update(Request $request, Task $task)
     {
         //
+         $request->validate([
+            'name' => 'required|min:3',
+            'description' => 'required',
+        ]);
+
+         $task->name =  $request->name;
+         $task->description = $request->description;
+         $task->save();
+
+        // $request->session()->falsh('message','Updated Succesfully');
+         return redirect('tasks');
     }
 
     /**
@@ -97,5 +109,9 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         //
+
+       
+        $task->delete();
+        return redirect('tasks');
     }
 }

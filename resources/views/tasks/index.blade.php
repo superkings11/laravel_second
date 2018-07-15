@@ -23,13 +23,13 @@
 	 			<td>{{$task->updated_at}}</td>
 	 			<td>
 	 				<div class="btn-group">
-	 					<a href="{{URL::to('tasks/'.$task->id)}}"><button class="btn btn-primary">Edit</button></a>
+	 					<a href="{{URL::to('tasks/'.$task->id.'/edit')}}"><button class="btn btn-primary">Edit</button></a>
 	 				</div>
 	 			</td>
 	 			<td>
-	 			<form action="">
+	 			<form action="{{url('tasks', [$task->id])}}" method="POST">
 	 				<input type="hidden" name="_method" value="Delete">
-	 				<input type="hidden" name="_method" value="{{ csrf_token() }}">
+	 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	 				<input type="submit" class="btn btn-danger" value="Delete">
 	 			</form>
 	 			</td>
